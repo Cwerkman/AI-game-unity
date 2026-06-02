@@ -26,18 +26,24 @@ public class PlayerMovement : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
-        // Movement direction
-        Vector3 move = Camera.main.transform.forward * vertical +
-               Camera.main.transform.right * horizontal;
 
-        move.y = 0;
+        Vector3 cameraForward = Camera.main.transform.forward;
+        Vector3 cameraRight = Camera.main.transform.right;
+
+        cameraForward.y = 0;
+        cameraRight.y = 0;
+
+        cameraForward.Normalize();
+        cameraRight.Normalize();
+
+        Vector3 move =
+            cameraForward * vertical +
+            cameraRight * horizontal;
+
         move = Vector3.ClampMagnitude(move, 1f);
 
-        // Prevent faster diagonal movement
-        move = Vector3.ClampMagnitude(move, 1f);
-
-        // Move player relative to world
         controller.Move(move * moveSpeed * Time.deltaTime);
+
 
         // Gravity
         if (controller.isGrounded && velocity.y < 0)
