@@ -6,13 +6,27 @@ public class EnemySpawner : MonoBehaviour
 
     public float spawnRadius = 20f;
     public float spawnInterval = 2f;
+    private float timer;
 
     void Start()
     {
-        InvokeRepeating(
-            nameof(SpawnEnemy),
-            1f,
-            spawnInterval);
+        
+    }
+    private void Update()
+    {
+        timer += Time.deltaTime;
+
+        float difficulty =
+            GameManager.Instance.GetDifficultyMultiplier();
+
+        float currentSpawnInterval =
+            Mathf.Max(0.3f, 2f / difficulty);
+
+        if (timer >= currentSpawnInterval)
+        {
+            SpawnEnemy();
+            timer = 0f;
+        }
     }
 
     void SpawnEnemy()

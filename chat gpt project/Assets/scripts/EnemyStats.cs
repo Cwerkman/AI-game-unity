@@ -4,7 +4,12 @@ public class EnemyStats : MonoBehaviour
 {
     void Start()
     {
-        float size = Random.Range(0.5f, 3f);
+        float maxSize =
+    Mathf.Min(5f,
+        3f + GameManager.Instance.GetSurvivalTime() / 60f);
+
+        float size = Random.Range(0.5f, maxSize);
+
 
         transform.localScale = Vector3.one * size;
 
@@ -37,6 +42,22 @@ public class EnemyStats : MonoBehaviour
             (size - 0.5f) / (3f - 0.5f)
         );
 
-        
+        float difficulty =
+    GameManager.Instance.GetDifficultyMultiplier();
+
+        health.maxHealth =
+            Mathf.Round(Mathf.Pow(size, 2f) * 5f * difficulty);
+
+        enemyDamage.damage =
+            Mathf.Round(size * 2f * difficulty);
+
+        follow.moveSpeed =
+            Mathf.Lerp(
+                5f,
+                1.5f,
+                (size - 0.5f) / (3f - 0.5f)
+            ) * Mathf.Sqrt(difficulty);
+
+
     }
 }

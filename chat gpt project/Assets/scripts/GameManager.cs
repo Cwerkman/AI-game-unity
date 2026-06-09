@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour
 
     public int score = 0;
 
+    private float survivalTime = 0f;
+
     void Awake()
     {
         if (Instance == null)
@@ -14,9 +16,29 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
     }
 
+    void Update()
+    {
+        survivalTime += Time.deltaTime;
+    }
+
     public void AddScore(int amount)
     {
         score += amount;
-        Debug.Log("Score: " + score);
+    }
+
+    public int GetScore()
+    {
+        return score;
+    }
+
+    public float GetSurvivalTime()
+    {
+        return survivalTime;
+    }
+
+    public float GetDifficultyMultiplier()
+    {
+        // Increases by 10% every 30 seconds
+        return 1f + (GetSurvivalTime() / 30f) * 0.1f;
     }
 }
