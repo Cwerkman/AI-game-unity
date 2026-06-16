@@ -8,5 +8,5 @@ after you die you can see your highscore on a scoreboard
 the goal of the game will be to get the highest score possible
 
 
-https://chatgpt.com/c/6a159d5a-7398-83eb-99d9-4a9ec40467ff
+https://chatgpt.com/share/6a314f7b-f558-83eb-971e-c83b7b3daf12
 
