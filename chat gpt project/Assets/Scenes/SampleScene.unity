@@ -2510,8 +2510,8 @@ MonoBehaviour:
   fireballPrefab: {fileID: 8760253480940107922, guid: 165081b502d1c7941b21eac0b2a9ab16, type: 3}
   lightningPrefab: {fileID: 362204010685521123, guid: c71dce286e660f445a2da4e2fcb7c8aa, type: 3}
   freezePrefab: {fileID: 1306307805950042943, guid: 743333458d09a984e96d9b40098ab6f7, type: 3}
-  laserPrefab: {fileID: 6081823127461496453, guid: 29169e1594c28a64d9fe2ff4c744daf3, type: 3}
-  explosionPrefab: {fileID: 0}
+  laserPrefab: {fileID: 2688180145889747844, guid: 457fad03723a9ca4a8742c59daba591b, type: 3}
+  explosionPrefab: {fileID: 5329075444621633544, guid: 0930769f22363d3409c853ccbe28f92d, type: 3}
   firePoint: {fileID: 1346109555}
 --- !u!114 &2031493144
 MonoBehaviour:

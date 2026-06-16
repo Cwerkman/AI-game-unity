@@ -2,15 +2,25 @@ using UnityEngine;
 
 public class FreezeSpell : MonoBehaviour
 {
-    public float radius = 8f;
-    public float duration = 3f;
+    public float speed = 15f;
+    public float lifetime = 5f;
 
     void Start()
+    {
+        Destroy(gameObject, lifetime);
+    }
+
+    void Update()
+    {
+        transform.position += transform.forward * speed * Time.deltaTime;
+    }
+
+    private void OnTriggerEnter(Collider other)
     {
         Collider[] hits =
             Physics.OverlapSphere(
                 transform.position,
-                radius);
+                5f);
 
         foreach (Collider hit in hits)
         {
@@ -19,7 +29,7 @@ public class FreezeSpell : MonoBehaviour
 
             if (enemy != null)
             {
-                enemy.Freeze(0.5f, duration);
+                enemy.Freeze(0.2f, 3f);
             }
         }
 

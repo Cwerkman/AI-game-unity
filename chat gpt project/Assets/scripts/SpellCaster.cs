@@ -20,14 +20,24 @@ public class SpellCaster : MonoBehaviour
 
     public Transform firePoint;
 
+    private GameObject activeLaser;
+
     void Update()
     {
         HandleSpellSelection();
 
-        if (Input.GetMouseButtonDown(0))
+        if (currentSpell == SpellType.Laser)
         {
-            CastSpell();
+            HandleLaser();
         }
+        else
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                CastSpell();
+            }
+        }
+        
     }
 
     void HandleSpellSelection()
@@ -43,6 +53,17 @@ public class SpellCaster : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha4))
             currentSpell = SpellType.Laser;
+            if (currentSpell == SpellType.Laser)
+            {
+                HandleLaser();
+            }
+            else
+            {
+                if (Input.GetMouseButtonDown(0))
+                {
+                    CastSpell();
+                }
+            }
 
         if (Input.GetKeyDown(KeyCode.Alpha5))
             currentSpell = SpellType.Explosion;
@@ -69,8 +90,49 @@ public class SpellCaster : MonoBehaviour
                 break;
 
             case SpellType.Explosion:
-                Instantiate(explosionPrefab, firePoint.position, firePoint.rotation);
+
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+                RaycastHit hit;
+
+                if (Physics.Raycast(ray, out hit))
+                {
+                    Instantiate(
+                        explosionPrefab,
+                        hit.point,
+                        Quaternion.identity
+                    );
+                }
+
                 break;
+        }
+    }
+    void HandleLaser()
+    {
+        if (Input.GetMouseButton(0))
+        {
+            activeLaser = Instantiate(
+                laserPrefab,
+                firePoint.position,
+                firePoint.rotation
+            );
+        }
+
+        if (Input.GetMouseButton(0))
+        {
+            if (activeLaser != null)
+            {
+                activeLaser.transform.position = firePoint.position;
+                activeLaser.transform.rotation = firePoint.rotation;
+            }
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            if (activeLaser != null)
+            {
+                Destroy(activeLaser);
+            }
         }
     }
 }

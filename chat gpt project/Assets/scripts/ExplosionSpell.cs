@@ -7,15 +7,12 @@ public class ExplosionSpell : MonoBehaviour
 
     void Start()
     {
-        Collider[] hits =
-            Physics.OverlapSphere(
-                transform.position,
-                radius);
+        Collider[] hits = Physics.OverlapSphere(transform.position, radius);
 
         foreach (Collider hit in hits)
         {
-            EnemyHealth enemy =
-                hit.GetComponent<EnemyHealth>();
+            Debug.Log("Explosion hit: " + hit.name);
+            EnemyHealth enemy = hit.GetComponent<EnemyHealth>();
 
             if (enemy != null)
             {
@@ -23,6 +20,6 @@ public class ExplosionSpell : MonoBehaviour
             }
         }
 
-        Destroy(gameObject, 0.1f);
+        Destroy(gameObject, 0.5f); // destroy explosion after 0.5 seconds
     }
 }

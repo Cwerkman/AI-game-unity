@@ -12,6 +12,7 @@ public class LaserSpell : MonoBehaviour
                 transform.position,
                 transform.forward,
                 range);
+        transform.position += transform.forward * 30f;
 
         foreach (RaycastHit hit in hits)
         {
